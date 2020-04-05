@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Music App</string>
+
+    <!-- Categories Text. -->
+    <string name="pop">Pop</string>
+    <string name="country">Country</string>
+    <string name="jazz">Jazz</string>
+    <string name="soul">Soul</string>
+    <string name="play_mode">Play Mode</string>
+</resources>
