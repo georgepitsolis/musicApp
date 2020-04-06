@@ -1,9 +1,11 @@
 package com.example.android.musicapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,10 +17,13 @@ import java.util.ArrayList;
 
 public class SongActivity extends AppCompatActivity {
 
+    String parentActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_song_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ImageView songImage = (ImageView) findViewById(R.id.single_cover);
         TextView songTitle = (TextView) findViewById(R.id.song_title);
@@ -29,6 +34,7 @@ public class SongActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final ArrayList<Song> song = intent.getParcelableArrayListExtra("song");
         final int position = intent.getIntExtra("position", 0);
+        parentActivity = intent.getStringExtra("parent_activity");
 
         Song current = song.get(position);
         songImage.setImageResource(current.getmImageAlbum());
@@ -71,6 +77,7 @@ public class SongActivity extends AppCompatActivity {
                     finish();
                     Intent reIntent = getIntent();
                     reIntent.putExtra("position", 0);
+                    reIntent.putExtra("parent_activity", parentActivity);
                     reIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) song);
                     startActivity(reIntent);
                 }
@@ -78,6 +85,7 @@ public class SongActivity extends AppCompatActivity {
                     finish();
                     Intent reIntent = getIntent();
                     reIntent.putExtra("position", position + 1);
+                    reIntent.putExtra("parent_activity", parentActivity);
                     reIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) song);
                     startActivity(reIntent);
                 }
@@ -93,6 +101,7 @@ public class SongActivity extends AppCompatActivity {
                     finish();
                     Intent reIntent = getIntent();
                     reIntent.putExtra("position", song.size() - 1);
+                    reIntent.putExtra("parent_activity", parentActivity);
                     reIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) song);
                     startActivity(reIntent);
                 }
@@ -100,11 +109,44 @@ public class SongActivity extends AppCompatActivity {
                     finish();
                     Intent reIntent = getIntent();
                     reIntent.putExtra("position", position - 1);
+                    reIntent.putExtra("parent_activity", parentActivity);
                     reIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) song);
                     startActivity(reIntent);
                 }
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                switch (parentActivity){
+                    case "pop":
+                        Intent popIntent = new Intent(SongActivity.this, PopActivity.class);
+                        startActivity(popIntent);
+                        finish();
+                        return true;
+                    case "soul":
+                        Intent soulIntent = new Intent(SongActivity.this, SoulActivity.class);
+                        startActivity(soulIntent);
+                        finish();
+                        return true;
+                    case "country":
+                        Intent countryIntent = new Intent(SongActivity.this, CountryActivity.class);
+                        startActivity(countryIntent);
+                        finish();
+                        return true;
+                    case "jazz":
+                        Intent jazzIntent = new Intent(SongActivity.this, JazzActivity.class);
+                        startActivity(jazzIntent);
+                        finish();
+                        return true;
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

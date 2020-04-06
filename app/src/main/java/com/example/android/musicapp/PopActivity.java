@@ -20,6 +20,7 @@ public class PopActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<Song> popSong = new ArrayList<Song>();
 
@@ -45,6 +46,7 @@ public class PopActivity extends AppCompatActivity {
                 Intent popIntent = new Intent(PopActivity.this, SongActivity.class);
 
                 popIntent.putExtra("position", position);
+                popIntent.putExtra("parent_activity", "pop");
                 popIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) popSong);
                 startActivity(popIntent);
             }

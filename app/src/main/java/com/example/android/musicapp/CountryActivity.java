@@ -17,6 +17,7 @@ public class CountryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<Song> countrySong = new ArrayList<Song>();
 
@@ -41,6 +42,7 @@ public class CountryActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent countryIntent = new Intent(CountryActivity.this, SongActivity.class);
                 countryIntent.putExtra("position", position);
+                countryIntent.putExtra("parent_activity", "country");
                 countryIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) countrySong);
                 startActivity(countryIntent);
             }

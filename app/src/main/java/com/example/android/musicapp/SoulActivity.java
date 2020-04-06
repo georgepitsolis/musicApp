@@ -17,6 +17,7 @@ public class SoulActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<Song> soulSong = new ArrayList<Song>();
 
@@ -41,6 +42,7 @@ public class SoulActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent soulIntent = new Intent(SoulActivity.this, SongActivity.class);
                 soulIntent.putExtra("position", position);
+                soulIntent.putExtra("parent_activity", "soul");
                 soulIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) soulSong);
                 startActivity(soulIntent);
             }

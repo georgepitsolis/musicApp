@@ -19,18 +19,22 @@
         </activity>
 
         <activity android:name=".SoulActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/soul">
         </activity>
 
         <activity android:name=".CountryActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/country">
         </activity>
 
         <activity android:name=".JazzActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/jazz">
         </activity>
 
         <activity android:name=".PopActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/pop">
         </activity>
 

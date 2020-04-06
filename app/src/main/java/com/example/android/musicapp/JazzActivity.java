@@ -17,6 +17,7 @@ public class JazzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.song_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<Song> jazzSong = new ArrayList<Song>();
 
@@ -41,6 +42,7 @@ public class JazzActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent jazzIntent = new Intent(JazzActivity.this, SongActivity.class);
                 jazzIntent.putExtra("position", position);
+                jazzIntent.putExtra("parent_activity", "jazz");
                 jazzIntent.putParcelableArrayListExtra("song", (ArrayList<? extends Parcelable>) jazzSong);
                 startActivity(jazzIntent);
             }
